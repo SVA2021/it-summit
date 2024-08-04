@@ -1,1 +1,44 @@
-<p>main works!</p>
+<h1 class="main-title">IT-SUMMIT</h1>
+<section class="main-section">
+  <h2 class="main-subtitle">Future events</h2>
+  <tui-carousel [duration]="0" [(index)]="futureEventIndex">
+    @for (event of futureEvents; track event.id) {
+      <tui-island *tuiItem>
+        <ng-container *ngTemplateOutlet="summitEvent; context: { $implicit: event }"></ng-container>
+      </tui-island>
+    }
+  </tui-carousel>
+
+  <tui-pagination
+    size="s"
+    class="pagination"
+    [length]="futureEvents.length"
+    [(index)]="futureEventIndex"></tui-pagination>
+</section>
+
+<section class="main-section">
+  <h2 class="main-subtitle">Finished events</h2>
+  <tui-carousel [duration]="0" [(index)]="finishedEventIndex" [itemsCount]="2">
+    @for (event of finishedEvents; track event.id) {
+      <tui-island *tuiItem>
+        <ng-container *ngTemplateOutlet="summitEvent; context: { $implicit: event }"></ng-container>
+      </tui-island>
+    }
+  </tui-carousel>
+
+  <tui-pagination
+    size="s"
+    class="pagination"
+    [length]="finishedEvents.length"
+    [(index)]="finishedEventIndex"></tui-pagination>
+</section>
+
+<ng-template #summitEvent let-event>
+  <div class="event-wrapper" [ngStyle]="{'background-image': 'url(' + event.imageUrl + ')'}">
+    <h3 class="event-title">{{ event.name }}</h3>
+    <p>{{ event.address }}</p>
+    <p>{{ event.startDate }} - {{ event.stopDate }}</p>
+    <p>{{ event.description }}</p>
+    <a routerLink="/event/{{ event.id }}" tuiButton size="m">See details</a>
+  </div>
+</ng-template>
