@@ -7,6 +7,12 @@
   <div class="personal">
     <a routerLink="/private" tuiLink> Private area </a>
     <div>basket</div>
-    <div>dark</div>
+    <button
+      tuiIconButton
+      type="button"
+      appearance="outline"
+      size="m"
+      [icon]="(night | async) ? 'tuiIconSun' : 'tuiIconMoon'"
+      (click)="toggleDarkMode()"></button>
   </div>
 </header>
