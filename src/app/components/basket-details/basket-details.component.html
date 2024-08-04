@@ -1,0 +1,23 @@
+<tui-badged-content
+  size="m"
+  class="tui-space_right-5"
+  [contentTop]="64"
+  [rounded]="true">
+  <button
+    tuiIconButton
+    type="button"
+    appearance="outline"
+    size="m"
+    icon="tuiIconShoppingCart"
+    tuiHint
+    [tuiHintHideDelay]="1000"
+    >
+    <tui-hint
+      *tuiHint
+      class="hint"
+      [@.disabled]="true"
+    >
+      add detailed basket info here
+    </tui-hint>
+  </button>
+</tui-badged-content>
