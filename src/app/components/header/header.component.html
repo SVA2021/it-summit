@@ -1,0 +1,12 @@
+<header class="header">
+  <div class="links">
+    @for (item of navigation; track item.name) {
+      <a routerLink="{{ item.url }}" tuiLink>{{ item.name }}</a>
+    }
+  </div>
+  <div class="personal">
+    <a routerLink="/private" tuiLink> Private area </a>
+    <div>basket</div>
+    <div>dark</div>
+  </div>
+</header>
