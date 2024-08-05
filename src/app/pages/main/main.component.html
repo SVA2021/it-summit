@@ -7,7 +7,7 @@
   } @else {
     <ng-container *ngIf="futureEvents$ | async as futureEvents">
       <tui-carousel [duration]="0" [(index)]="futureEventIndex">
-        @for (event of futureEvents$ | async; track event.id) {
+        @for (event of futureEvents; track event.id) {
           <tui-island *tuiItem>
             <ng-container *ngTemplateOutlet="summitEvent; context: { $implicit: event }"></ng-container>
           </tui-island>
@@ -32,7 +32,7 @@
   } @else {
     <ng-container *ngIf="finishedEvents$ | async as finishedEvents">
       <tui-carousel [duration]="0" [(index)]="finishedEventIndex" [itemsCount]="2">
-        @for (event of futureEvents$ | async; track event.id) {
+        @for (event of finishedEvents; track event.id) {
           <tui-island *tuiItem>
             <ng-container *ngTemplateOutlet="summitEvent; context: { $implicit: event }"></ng-container>
           </tui-island>
