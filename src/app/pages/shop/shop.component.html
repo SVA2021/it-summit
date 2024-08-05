@@ -1,1 +1,17 @@
-<p>shop works!</p>
+<h1 class="main-title">TICKETS</h1>
+
+@if (isLoading$ | async) {
+  <tui-loader [overlay]="true" size="xxl"></tui-loader>
+} @else {
+  <ng-container *ngIf="tickets$ | async as tickets">
+    @for (ticket of tickets; track ticket.id) {
+      <div>{{ ticket }}</div>
+    } @empty {
+      <div *tuiItem>No tickets available</div>
+    }
+  </ng-container>
+}
+
+@if (error$ | async) {
+  <div class="error">{{ error$ | async }}</div>
+}
