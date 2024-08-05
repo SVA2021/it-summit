@@ -1,10 +1,19 @@
-import { ChangeDetectionStrategy, Component, inject, OnInit, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, OnInit } from '@angular/core';
 import { TuiCarouselModule, TuiIslandModule, TuiPaginationModule } from '@taiga-ui/kit';
 import { RouterLink } from '@angular/router';
 import { TuiButtonModule, TuiLinkModule, TuiLoaderModule } from '@taiga-ui/core';
-import { NgOptimizedImage, NgStyle, NgTemplateOutlet } from '@angular/common';
+import { AsyncPipe, NgIf, NgOptimizedImage, NgStyle, NgTemplateOutlet } from '@angular/common';
 import { SummitEvent } from '@core/models/models';
-import { ApiFakeCallService } from '@core/services/api-fake-call.service';
+import { Store } from '@ngrx/store';
+import {
+  selectFinishedSummitEvents,
+  selectFutureSummitEvents,
+  selectSummitEventsError,
+  selectSummitEventsLoading,
+} from '../../store/summit-events/summit-events.selectors';
+import { Observable, takeUntil } from 'rxjs';
+import { SummitEventsActions } from '../../store/summit-events/summit-events.actions';
+import { TuiDestroyService } from '@taiga-ui/cdk';
 
 @Component({
   selector: 'app-main',
@@ -20,32 +29,28 @@ import { ApiFakeCallService } from '@core/services/api-fake-call.service';
     TuiButtonModule,
     NgStyle,
     TuiLoaderModule,
+    AsyncPipe,
+    NgIf,
   ],
   templateUrl: './main.component.html',
   styleUrl: './main.component.less',
   changeDetection: ChangeDetectionStrategy.OnPush,
+  providers: [TuiDestroyService],
 })
 export class MainComponent implements OnInit {
-  futureEvents: SummitEvent[] = [];
-  finishedEvents: SummitEvent[] = [];
+  store = inject(Store);
+  destroy$ = inject(TuiDestroyService);
+  futureEvents$: Observable<SummitEvent[]> = this.store.select(selectFutureSummitEvents).pipe(takeUntil(this.destroy$));
+  finishedEvents$: Observable<SummitEvent[]> = this.store
+    .select(selectFinishedSummitEvents)
+    .pipe(takeUntil(this.destroy$));
+  isLoading$: Observable<boolean> = this.store.select(selectSummitEventsLoading).pipe(takeUntil(this.destroy$));
+  error$: Observable<string> = this.store.select(selectSummitEventsError).pipe(takeUntil(this.destroy$));
 
   futureEventIndex = 0;
   finishedEventIndex = 0;
 
-  isLoading = signal(true);
-
-  apiCallService = inject(ApiFakeCallService);
-
   ngOnInit() {
-    this.apiCallService.getEvents().subscribe(
-      events => {
-        this.isLoading.set(false);
-        this.futureEvents = events.filter(event => !event.isFinished);
-        this.finishedEvents = events.filter(event => event.isFinished);
-      },
-      () => {
-        this.isLoading.set(false);
-      }
-    );
+    this.store.dispatch(SummitEventsActions.loadingSummitEvents());
   }
 }

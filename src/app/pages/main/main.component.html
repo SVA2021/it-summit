@@ -1,47 +1,58 @@
 <h1 class="main-title">IT-SUMMIT</h1>
+
 <section class="main-section">
   <h2 class="main-subtitle">Future events</h2>
-  <tui-carousel [duration]="0" [(index)]="futureEventIndex">
-    @for (event of futureEvents; track event.id) {
-      <tui-island *tuiItem>
-        <ng-container *ngTemplateOutlet="summitEvent; context: { $implicit: event }"></ng-container>
-      </tui-island>
-    } @empty {
-      <tui-island *tuiItem> No upcoming events </tui-island>
-    }
-  </tui-carousel>
+  @if (isLoading$ | async) {
+    <tui-loader [overlay]="true" size="xxl"></tui-loader>
+  } @else {
+    <ng-container *ngIf="futureEvents$ | async as futureEvents">
+      <tui-carousel [duration]="0" [(index)]="futureEventIndex">
+        @for (event of futureEvents$ | async; track event.id) {
+          <tui-island *tuiItem>
+            <ng-container *ngTemplateOutlet="summitEvent; context: { $implicit: event }"></ng-container>
+          </tui-island>
+        } @empty {
+          <tui-island *tuiItem> No upcoming events </tui-island>
+        }
+      </tui-carousel>
 
-  <tui-pagination
-    size="s"
-    class="pagination"
-    [length]="futureEvents.length"
-    [(index)]="futureEventIndex"></tui-pagination>
+      <tui-pagination
+        size="s"
+        class="pagination"
+        [length]="futureEvents.length"
+        [(index)]="futureEventIndex"></tui-pagination>
+    </ng-container>
+  }
 </section>
 
 <section class="main-section">
   <h2 class="main-subtitle">Finished events</h2>
-  @defer (when !isLoading()) {
-    <tui-carousel [duration]="0" [(index)]="finishedEventIndex" [itemsCount]="2">
-      @for (event of finishedEvents; track event.id) {
-        <tui-island *tuiItem>
-          <ng-container *ngTemplateOutlet="summitEvent; context: { $implicit: event }"></ng-container>
-        </tui-island>
-      } @empty {
-        <tui-island *tuiItem> No finished events </tui-island>
-      }
-    </tui-carousel>
-
-    <tui-pagination
-      size="s"
-      class="pagination"
-      [length]="finishedEvents.length"
-      [(index)]="finishedEventIndex"></tui-pagination>
-  } @placeholder (minimum 100ms) {
+  @if (isLoading$ | async) {
     <tui-loader [overlay]="true" size="xxl"></tui-loader>
-  } @error {
-    <div class="error">Something went wrong...</div>
+  } @else {
+    <ng-container *ngIf="finishedEvents$ | async as finishedEvents">
+      <tui-carousel [duration]="0" [(index)]="finishedEventIndex" [itemsCount]="2">
+        @for (event of futureEvents$ | async; track event.id) {
+          <tui-island *tuiItem>
+            <ng-container *ngTemplateOutlet="summitEvent; context: { $implicit: event }"></ng-container>
+          </tui-island>
+        } @empty {
+          <tui-island *tuiItem> No finished events </tui-island>
+        }
+      </tui-carousel>
+
+      <tui-pagination
+        size="s"
+        class="pagination"
+        [length]="finishedEvents.length"
+        [(index)]="finishedEventIndex"></tui-pagination>
+    </ng-container>
   }
 </section>
+
+@if (error$ | async) {
+  <div class="error">{{ error$ | async }}</div>
+}
 
 <ng-template #summitEvent let-event>
   <div class="event-wrapper" [ngStyle]="{ 'background-image': 'url(' + event.imageUrl + ')' }">
