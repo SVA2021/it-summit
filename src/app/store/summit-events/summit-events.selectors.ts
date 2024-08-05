@@ -21,3 +21,6 @@ export const selectSummitEventsLoading = createSelector(
 );
 
 export const selectSummitEventsError = createSelector(selectSummitEventsFeature, summitEvents => summitEvents.error);
+
+export const selectSummitEventById = (id: number | undefined) =>
+  createSelector(selectAllSummitEvents, summitEvents => summitEvents.find(event => event.id === id));
