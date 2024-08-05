@@ -3,7 +3,7 @@ import { RouterLink } from '@angular/router';
 import { TuiButtonModule, TuiLinkModule } from '@taiga-ui/core';
 import { TuiThemeNightService } from '@taiga-ui/addon-doc';
 import { AsyncPipe } from '@angular/common';
-import {BasketDetailsComponent} from "../basket-details/basket-details.component";
+import { BasketDetailsComponent } from '../basket-details/basket-details.component';
 
 interface NavigationItem {
   name: string;
@@ -18,10 +18,6 @@ const NAVIGATION: NavigationItem[] = [
   {
     name: 'Shop',
     url: '/shop',
-  },
-  {
-    name: 'Basket',
-    url: '/basket',
   },
   {
     name: 'Contacts',
