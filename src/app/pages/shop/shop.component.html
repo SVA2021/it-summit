@@ -3,13 +3,13 @@
 @if (isLoading$ | async) {
   <tui-loader [overlay]="true" size="xxl"></tui-loader>
 } @else {
-  <ng-container *ngIf="tickets$ | async as tickets">
+  <div class="tickets-wrapper" *ngIf="tickets$ | async as tickets">
     @for (ticket of tickets; track ticket.id) {
-      <div>{{ ticket }}</div>
+      <app-ticket-details [ticket]="ticket"></app-ticket-details>
     } @empty {
-      <div *tuiItem>No tickets available</div>
+      <div class="error">No tickets available</div>
     }
-  </ng-container>
+  </div>
 }
 
 @if (error$ | async) {

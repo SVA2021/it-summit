@@ -1,0 +1,59 @@
+<div class="ticket-details-wrapper">
+  <div class="ticket-img">
+    <img
+      [ngSrc]="'https://dummyjson.com/image/150x150/008080/ffffff?text=Ticket'"
+      [width]="150"
+      [height]="150"
+      [alt]="'ticket'"
+      class="ticket-details-image" />
+  </div>
+  <div class="ticket-content">
+    <p>
+      Ticket type: "{{ ticket.type | uppercase }}"
+      <tui-badge status="error" [value]="'-' + ticket.discount + ' %'">
+        <tui-svg src="tuiIconDollarSign"></tui-svg>
+      </tui-badge>
+    </p>
+    <ng-container *ngIf="eventDetails$ | async as eventDetails">
+      <p>Event: {{ eventDetails.name }}</p>
+      <p>{{ eventDetails.startDate }} - {{ eventDetails.stopDate }}</p>
+    </ng-container>
+    <div class="price">
+      <p>
+        {{ getPriceWithDiscount() | tuiFormatNumber: { decimalLimit: 0, rounding: 'ceil' } }} {{ 'RUB' | tuiCurrency }}
+      </p>
+      <p class="price-original">
+        {{ ticket.price | tuiFormatNumber: { decimalLimit: 0, rounding: 'ceil' } }} {{ 'RUB' | tuiCurrency }}
+      </p>
+    </div>
+    <div class="ticket-details-features" *ngIf="!!ticket.features?.length">
+      <p>Features available for this ticket:</p>
+      <div class="ticket-details-tags">
+        @for (feature of ticket.features; track feature) {
+          <tui-tag size="l" [value]="feature" [hoverable]="true" status="primary"></tui-tag>
+        }
+      </div>
+    </div>
+    <p class="ticket-details-available">
+      <b>Available:</b>
+      <tui-badge
+        [status]="ticket.quantity > 0 ? 'success' : 'error'"
+        [value]="ticket.quantity > 0 ? 'Available(' + ticket.quantity + ')' : 'Sold out'"
+        class="tui-space_right-2 tui-space_bottom-2"></tui-badge>
+    </p>
+
+    <div class="ticket-details-input">
+      <tui-input-number [formControl]="qty" [min]="0" [max]="ticket.quantity || 0">Tickets qty </tui-input-number>
+    </div>
+
+    <button
+      tuiButton
+      type="button"
+      size="m"
+      class="ticket-details-button"
+      icon="tuiIconShoppingCart"
+      (click)="addToBasket()">
+      Add to basket
+    </button>
+  </div>
+</div>
