@@ -4,6 +4,10 @@ import { ApplicationConfig, provideZoneChangeDetection, importProvidersFrom } fr
 import { provideRouter } from '@angular/router';
 
 import { routes } from './app.routes';
+import { provideStore } from '@ngrx/store';
+import { provideEffects } from '@ngrx/effects';
+import { appReducers } from './store/app.reducers';
+import { appEffects } from './store/app.effects';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -11,5 +15,7 @@ export const appConfig: ApplicationConfig = {
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(routes),
     importProvidersFrom(TuiRootModule),
+    provideStore(appReducers),
+    provideEffects(appEffects),
   ],
 };
