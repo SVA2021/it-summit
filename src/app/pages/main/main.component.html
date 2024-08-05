@@ -6,6 +6,8 @@
       <tui-island *tuiItem>
         <ng-container *ngTemplateOutlet="summitEvent; context: { $implicit: event }"></ng-container>
       </tui-island>
+    } @empty {
+      <tui-island *tuiItem> No upcoming events </tui-island>
     }
   </tui-carousel>
 
@@ -18,23 +20,31 @@
 
 <section class="main-section">
   <h2 class="main-subtitle">Finished events</h2>
-  <tui-carousel [duration]="0" [(index)]="finishedEventIndex" [itemsCount]="2">
-    @for (event of finishedEvents; track event.id) {
-      <tui-island *tuiItem>
-        <ng-container *ngTemplateOutlet="summitEvent; context: { $implicit: event }"></ng-container>
-      </tui-island>
-    }
-  </tui-carousel>
+  @defer (when !isLoading()) {
+    <tui-carousel [duration]="0" [(index)]="finishedEventIndex" [itemsCount]="2">
+      @for (event of finishedEvents; track event.id) {
+        <tui-island *tuiItem>
+          <ng-container *ngTemplateOutlet="summitEvent; context: { $implicit: event }"></ng-container>
+        </tui-island>
+      } @empty {
+        <tui-island *tuiItem> No finished events </tui-island>
+      }
+    </tui-carousel>
 
-  <tui-pagination
-    size="s"
-    class="pagination"
-    [length]="finishedEvents.length"
-    [(index)]="finishedEventIndex"></tui-pagination>
+    <tui-pagination
+      size="s"
+      class="pagination"
+      [length]="finishedEvents.length"
+      [(index)]="finishedEventIndex"></tui-pagination>
+  } @placeholder (minimum 100ms) {
+    <tui-loader [overlay]="true" size="xxl"></tui-loader>
+  } @error {
+    <div class="error">Something went wrong...</div>
+  }
 </section>
 
 <ng-template #summitEvent let-event>
-  <div class="event-wrapper" [ngStyle]="{'background-image': 'url(' + event.imageUrl + ')'}">
+  <div class="event-wrapper" [ngStyle]="{ 'background-image': 'url(' + event.imageUrl + ')' }">
     <h3 class="event-title">{{ event.name }}</h3>
     <p>{{ event.address }}</p>
     <p>{{ event.startDate }} - {{ event.stopDate }}</p>
