@@ -1,4 +1,4 @@
-import { SummitEvent } from '@core/models/models';
+import { SummitEvent, Ticket } from '@core/models/models';
 
 export const SUMMIT_EVENTS: SummitEvent[] = [
   {
@@ -66,5 +66,44 @@ export const SUMMIT_EVENTS: SummitEvent[] = [
     isFinished: false,
     address: 'Address 6',
     coordinates: [0, 0],
+  },
+];
+
+export const TICKETS: Ticket[] = [
+  {
+    id: 111,
+    eventId: 6,
+    type: 'vip',
+    price: 10000,
+    discount: 15,
+    quantity: 10,
+    features: ['feature 1', 'feature 2', 'feature 3', 'feature 4'],
+  },
+  {
+    id: 222,
+    eventId: 6,
+    type: 'standard',
+    price: 7000,
+    discount: 25,
+    quantity: 10,
+    features: ['feature 1', 'feature 2', 'feature 3'],
+  },
+  {
+    id: 333,
+    eventId: 6,
+    type: 'comfort',
+    price: 5000,
+    discount: 0,
+    quantity: 10,
+    features: ['feature 1', 'feature 2'],
+  },
+  {
+    id: 444,
+    eventId: 5,
+    type: 'vip',
+    price: 10000,
+    discount: 15,
+    quantity: 0,
+    features: ['feature 1', 'feature 2', 'feature 3', 'feature 4'],
   },
 ];

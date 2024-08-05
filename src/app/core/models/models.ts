@@ -9,3 +9,15 @@ export interface SummitEvent {
   address: string;
   coordinates: [number, number] | null;
 }
+
+export type TicketType = 'vip' | 'comfort' | 'standard';
+
+export interface Ticket {
+  id: number;
+  eventId: number;
+  type: TicketType;
+  price: number;
+  discount: number;
+  quantity: number;
+  features: string[];
+}
