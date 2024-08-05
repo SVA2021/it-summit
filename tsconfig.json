@@ -27,6 +27,7 @@
       "@components/*": ["./src/app/components/*"],
       "@db/*": ["./src/app/db/*"],
       "@pages/*": ["./src/app/pages/*"],
+      "@store/*": ["./src/app/store/*"],
     }
   },
   "angularCompilerOptions": {
