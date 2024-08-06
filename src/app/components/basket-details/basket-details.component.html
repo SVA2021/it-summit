@@ -6,7 +6,7 @@
     size="m"
     icon="tuiIconShoppingCart"
     tuiHint
-    [tuiHintHideDelay]="1000">
+    [tuiHintHideDelay]="500">
     <ng-container *ngIf="basket$ | async as basket">
       <tui-hint *tuiHint class="hint" [@.disabled]="true">
         @for (item of basket; track item.ticket.id) {
