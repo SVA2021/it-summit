@@ -9,6 +9,8 @@ import { Store } from '@ngrx/store';
 import { Observable, of, takeUntil } from 'rxjs';
 import { selectSummitEventById } from '@store/summit-events/summit-events.selectors';
 import { TuiDestroyService } from '@taiga-ui/cdk';
+import { BasketActions } from '@store/basket/basket.actions';
+import { getDiscountPrice } from '@core/helpers/helpers';
 
 @Component({
   selector: 'app-ticket-details',
@@ -49,21 +51,22 @@ export class TicketDetailsComponent implements OnInit {
   qty = new FormControl<number>(0, [Validators.min(0)]);
 
   ngOnInit() {
-    this.qty.addValidators(Validators.max(this.ticket.quantity));
+    this.qty.addValidators(Validators.max(this.ticket.availableQty));
     this.qty.updateValueAndValidity();
 
     this.eventDetails$ = this.store.select(selectSummitEventById(this.ticket.eventId)).pipe(takeUntil(this.destroy$));
   }
 
   addToBasket() {
-    console.log(this.ticket);
+    if (!this.qty.value) {
+      return;
+    }
+    this.store.dispatch(
+      BasketActions.addItemToBasket({ item: { ticket: this.ticket, quantity: this.qty.value || 0 } })
+    );
   }
 
   getPriceWithDiscount() {
-    if (this.ticket.discount) {
-      return this.ticket.price - (this.ticket.price * this.ticket.discount) / 100;
-    } else {
-      return this.ticket.price;
-    }
+    return getDiscountPrice(this.ticket);
   }
 }

@@ -1,8 +1,4 @@
-<tui-badged-content
-  size="m"
-  class="tui-space_right-5"
-  [contentTop]="64"
-  [rounded]="true">
+<tui-badged-content size="m" [contentTop]="totalItems$ | async" [rounded]="true">
   <button
     tuiIconButton
     type="button"
@@ -10,14 +6,34 @@
     size="m"
     icon="tuiIconShoppingCart"
     tuiHint
-    [tuiHintHideDelay]="1000"
-    >
-    <tui-hint
-      *tuiHint
-      class="hint"
-      [@.disabled]="true"
-    >
-      add detailed basket info here
-    </tui-hint>
+    [tuiHintHideDelay]="1000">
+    <ng-container *ngIf="basket$ | async as basket">
+      <tui-hint *tuiHint class="hint" [@.disabled]="true">
+        @for (item of basket; track item.ticket.id) {
+          <div class="basket-item">
+            <p><b>EventID: </b>[{{ item.ticket.eventId }}]</p>
+            <p class="basket-item-qty">
+              {{ item.quantity }}
+              X
+              {{ getPriceWithDiscount(item.ticket) | tuiFormatNumber: { decimalLimit: 0, rounding: 'ceil' } }}
+              {{ 'RUB' | tuiCurrency }}
+            </p>
+          </div>
+        } @empty {
+          Basket is empty
+        }
+
+        <button
+          *ngIf="!!basket.length"
+          tuiButton
+          class="basket-btn"
+          type="button"
+          size="s"
+          icon="tuiIconShoppingCart"
+          routerLink="/basket">
+          Go to basket
+        </button>
+      </tui-hint>
+    </ng-container>
   </button>
 </tui-badged-content>

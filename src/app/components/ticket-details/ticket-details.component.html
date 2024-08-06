@@ -39,13 +39,13 @@
     <p class="ticket-details-available">
       <b>Available:</b>
       <tui-badge
-        [status]="ticket.quantity > 0 ? 'success' : 'error'"
-        [value]="ticket.quantity > 0 ? 'In stock (' + ticket.quantity + ')' : 'Sold out'"
+        [status]="ticket.availableQty > 0 ? 'success' : 'error'"
+        [value]="ticket.availableQty > 0 ? 'In stock (' + ticket.availableQty + ')' : 'Sold out'"
         class="tui-space_right-2 tui-space_bottom-2"></tui-badge>
     </p>
 
     <div class="ticket-details-input">
-      <tui-input-number [tuiTextfieldSize]="'m'" [formControl]="qty" [min]="0" [max]="ticket.quantity || 0"
+      <tui-input-number [tuiTextfieldSize]="'m'" [formControl]="qty" [min]="0" [max]="ticket.availableQty || 0"
         >Tickets qty
       </tui-input-number>
     </div>
@@ -56,6 +56,7 @@
       size="m"
       class="ticket-details-button"
       icon="tuiIconShoppingCart"
+      [disabled]="qty.value === 0"
       (click)="addToBasket()">
       Add to basket
     </button>
