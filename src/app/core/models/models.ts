@@ -32,3 +32,9 @@ export interface Contact {
   email: string;
   phone: string;
 }
+
+export interface User {
+  name: string;
+  email: string;
+  phone: string;
+}

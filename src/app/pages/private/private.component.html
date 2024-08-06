@@ -1,1 +1,43 @@
-<p>private works!</p>
+<h1 class="main-title">PRIVATE AREA</h1>
+
+@if (auth.isAuthenticated() && !isEdit) {
+  <h3>Your personal data</h3>
+  <div class="user">
+    <p>Name: {{ auth.user?.name }}</p>
+    <p>Email: {{ auth.user?.email }}</p>
+    <p>Phone: {{ auth.user?.phone }}</p>
+
+    <button
+      tuiButton
+      class="edit-btn"
+      appearance="primary"
+      type="button"
+      size="s"
+      icon="tuiIconEdit2"
+      (click)="setEditMode()">
+      Edit
+    </button>
+  </div>
+} @else {
+  <div>
+    <h3>Please enter your personal data</h3>
+    <form [formGroup]="authForm" class="form">
+      <tui-input formControlName="name" [tuiTextfieldSize]="'s'">
+        Type a name
+        <input tuiTextfield />
+      </tui-input>
+      <tui-input formControlName="email" [tuiTextfieldSize]="'s'">
+        Type an email
+        <input tuiTextfield type="email" />
+      </tui-input>
+      <tui-input-phone formControlName="phone" [tuiTextfieldSize]="'s'">
+        Type a phone number
+        <input autocomplete="tel" tuiTextfield />
+      </tui-input-phone>
+
+      <button tuiButton class="edit-btn" appearance="primary" type="button" size="s" (click)="submitForm()">
+        Submit
+      </button>
+    </form>
+  </div>
+}
