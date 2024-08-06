@@ -1,1 +1,15 @@
-<p>contacts works!</p>
+<h1 class="main-title">CONTACTS</h1>
+
+<div class="contacts">
+  @for (contact of contacts; track contact.email) {
+    <tui-island class="contact">
+      <h4>{{ contact.name }}</h4>
+      <a icon="tuiIconMail" iconAlign="left" tuiLink href="mailto:{{ contact.email }}">
+        {{ contact.email }}
+      </a>
+      <a icon="tuiIconPhone" iconAlign="left" tuiLink href="tel:{{ contact.phone }}">
+        {{ contact.phone }}
+      </a>
+    </tui-island>
+  }
+</div>

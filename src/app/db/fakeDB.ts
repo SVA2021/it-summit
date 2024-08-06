@@ -1,4 +1,4 @@
-import { SummitEvent, Ticket } from '@core/models/models';
+import {Contact, SummitEvent, Ticket} from '@core/models/models';
 
 export const SUMMIT_EVENTS: SummitEvent[] = [
   {
@@ -105,5 +105,28 @@ export const TICKETS: Ticket[] = [
     discount: 15,
     availableQty: 0,
     features: ['feature 1', 'feature 2', 'feature 3', 'feature 4'],
+  },
+];
+
+export const CONTACTS: Contact[] = [
+  {
+    name: 'Special Ticket Commission',
+    email: 'jdoe@it123.com',
+    phone: '123456789',
+  },
+  {
+    name: 'Program Commission',
+    email: 'jdoe@it1234.com',
+    phone: '123456789',
+  },
+  {
+    name: 'IT Support',
+    email: 'jdoe@it1231241251.com',
+    phone: '123456789',
+  },
+  {
+    name: 'Purchase Manager',
+    email: 'jdoe@it123123123123.com',
+    phone: '123456789',
   },
 ];

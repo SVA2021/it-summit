@@ -26,3 +26,9 @@ export interface BasketItem {
   ticket: Ticket,
   quantity: number;
 }
+
+export interface Contact {
+  name: string;
+  email: string;
+  phone: string;
+}
