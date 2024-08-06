@@ -1,1 +1,50 @@
-<p>basket works!</p>
+<h1 class="main-title">BASKET</h1>
+
+<div class="basket-buttons">
+  <button tuiButton class="basket-btn" type="button" size="s" icon="tuiIconShoppingBag" routerLink="/shop">
+    Go back to ticket shop
+  </button>
+  <button
+    tuiButton
+    class="basket-btn"
+    appearance="accent"
+    type="button"
+    size="s"
+    icon="tuiIconTrash2"
+    (click)="clearBasket()">
+    Clear basket
+  </button>
+</div>
+
+<ng-container *ngIf="basket$ | async as basket">
+  @for (item of basket; track item.ticket.id) {
+    <div class="ticket">
+      <div class="ticket-description">
+        <p>Ticket type: "{{ item.ticket.type | uppercase }}"</p>
+        <p>{{ getEventDetailsById(item.ticket.eventId) }}</p>
+      </div>
+      <p class="basket-item-qty">
+        {{ item.quantity }}
+        X
+        {{ getPriceWithDiscount(item.ticket) | tuiFormatNumber: { decimalLimit: 0, rounding: 'ceil' } }}
+        {{ 'RUB' | tuiCurrency }}
+        =
+        {{ getPriceWithDiscount(item.ticket) * item.quantity | tuiFormatNumber: { decimalLimit: 0, rounding: 'ceil' } }}
+        {{ 'RUB' | tuiCurrency }}
+      </p>
+    </div>
+  } @empty {
+    <div class="empty">No items in basket</div>
+  }
+
+  <ng-container *ngIf="total$ | async as totalPrice">
+    <div class="total-price">
+      {{ totalPrice | tuiFormatNumber: { decimalLimit: 0, rounding: 'ceil' } }} {{ 'RUB' | tuiCurrency }}
+    </div>
+
+    <div class="basket-buy-btn">
+      <tui-thumbnail-card cardNumber="1234" paymentSystem="mir" class="logo"></tui-thumbnail-card>
+      <button tuiButton appearance="outline" type="button" size="m" (click)="buyTickets()">PAY</button>
+    </div>
+  </ng-container>
+</ng-container>
