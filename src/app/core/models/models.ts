@@ -18,6 +18,11 @@ export interface Ticket {
   type: TicketType;
   price: number;
   discount: number;
-  quantity: number;
+  availableQty: number;
   features: string[];
+}
+
+export interface BasketItem {
+  ticket: Ticket,
+  quantity: number;
 }

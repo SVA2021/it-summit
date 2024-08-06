@@ -76,7 +76,7 @@ export const TICKETS: Ticket[] = [
     type: 'vip',
     price: 10000,
     discount: 15,
-    quantity: 10,
+    availableQty: 10,
     features: ['feature 1', 'feature 2', 'feature 3', 'feature 4'],
   },
   {
@@ -85,7 +85,7 @@ export const TICKETS: Ticket[] = [
     type: 'standard',
     price: 7000,
     discount: 25,
-    quantity: 10,
+    availableQty: 10,
     features: ['feature 1', 'feature 2', 'feature 3'],
   },
   {
@@ -94,7 +94,7 @@ export const TICKETS: Ticket[] = [
     type: 'comfort',
     price: 5000,
     discount: 0,
-    quantity: 10,
+    availableQty: 10,
     features: ['feature 1', 'feature 2'],
   },
   {
@@ -103,7 +103,7 @@ export const TICKETS: Ticket[] = [
     type: 'vip',
     price: 10000,
     discount: 15,
-    quantity: 0,
+    availableQty: 0,
     features: ['feature 1', 'feature 2', 'feature 3', 'feature 4'],
   },
 ];
