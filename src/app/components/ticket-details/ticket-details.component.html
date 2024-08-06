@@ -1,28 +1,30 @@
 <div class="ticket-details-wrapper">
   <div class="ticket-img">
     <img
-      [ngSrc]="'https://dummyjson.com/image/150x150/008080/ffffff?text=Ticket'"
-      [width]="150"
-      [height]="150"
+      [ngSrc]="'https://dummyjson.com/image/300x300/008080/ffffff?text=Ticket'"
+      [width]="300"
+      [height]="300"
       [alt]="'ticket'"
+      priority="low"
       class="ticket-details-image" />
   </div>
   <div class="ticket-content">
     <p>
       Ticket type: "{{ ticket.type | uppercase }}"
-      <tui-badge status="error" [value]="'-' + ticket.discount + ' %'">
+      <tui-badge *ngIf="!!ticket.discount" status="error" [value]="'-' + ticket.discount + ' %'">
         <tui-svg src="tuiIconDollarSign"></tui-svg>
       </tui-badge>
     </p>
     <ng-container *ngIf="eventDetails$ | async as eventDetails">
       <p>Event: {{ eventDetails.name }}</p>
-      <p>{{ eventDetails.startDate }} - {{ eventDetails.stopDate }}</p>
+      <p>{{ eventDetails.startDate | date: 'mediumDate' }} - {{ eventDetails.stopDate | date: 'mediumDate' }}</p>
+      <p class="address">{{ eventDetails.address }}</p>
     </ng-container>
     <div class="price">
-      <p>
+      <p class="price-discount">
         {{ getPriceWithDiscount() | tuiFormatNumber: { decimalLimit: 0, rounding: 'ceil' } }} {{ 'RUB' | tuiCurrency }}
       </p>
-      <p class="price-original">
+      <p class="price-original" *ngIf="!!ticket.discount">
         {{ ticket.price | tuiFormatNumber: { decimalLimit: 0, rounding: 'ceil' } }} {{ 'RUB' | tuiCurrency }}
       </p>
     </div>
@@ -38,12 +40,14 @@
       <b>Available:</b>
       <tui-badge
         [status]="ticket.quantity > 0 ? 'success' : 'error'"
-        [value]="ticket.quantity > 0 ? 'Available(' + ticket.quantity + ')' : 'Sold out'"
+        [value]="ticket.quantity > 0 ? 'In stock (' + ticket.quantity + ')' : 'Sold out'"
         class="tui-space_right-2 tui-space_bottom-2"></tui-badge>
     </p>
 
     <div class="ticket-details-input">
-      <tui-input-number [formControl]="qty" [min]="0" [max]="ticket.quantity || 0">Tickets qty </tui-input-number>
+      <tui-input-number [tuiTextfieldSize]="'m'" [formControl]="qty" [min]="0" [max]="ticket.quantity || 0"
+        >Tickets qty
+      </tui-input-number>
     </div>
 
     <button

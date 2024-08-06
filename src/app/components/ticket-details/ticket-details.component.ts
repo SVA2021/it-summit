@@ -2,8 +2,8 @@ import { ChangeDetectionStrategy, Component, inject, Input, OnInit } from '@angu
 import { SummitEvent, Ticket } from '@core/models/models';
 import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 import { TuiBadgeModule, TuiInputNumberModule, tuiInputNumberOptionsProvider, TuiTagModule } from '@taiga-ui/kit';
-import { TuiButtonModule, TuiFormatNumberPipeModule, TuiSvgModule } from '@taiga-ui/core';
-import { AsyncPipe, NgIf, NgOptimizedImage, UpperCasePipe } from '@angular/common';
+import { TuiButtonModule, TuiFormatNumberPipeModule, TuiSvgModule, TuiTextfieldControllerModule } from '@taiga-ui/core';
+import { AsyncPipe, DatePipe, NgIf, NgOptimizedImage, UpperCasePipe } from '@angular/common';
 import { TuiCurrencyPipeModule } from '@taiga-ui/addon-commerce';
 import { Store } from '@ngrx/store';
 import { Observable, of, takeUntil } from 'rxjs';
@@ -26,6 +26,8 @@ import { TuiDestroyService } from '@taiga-ui/cdk';
     UpperCasePipe,
     NgOptimizedImage,
     TuiSvgModule,
+    TuiTextfieldControllerModule,
+    DatePipe,
   ],
   templateUrl: './ticket-details.component.html',
   styleUrl: './ticket-details.component.less',

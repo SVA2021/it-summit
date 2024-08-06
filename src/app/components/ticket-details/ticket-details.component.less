@@ -11,6 +11,12 @@
   padding: 8px;
   border: 1px solid var(--tui-base-09);
   border-radius: 8px;
+
+  @media screen and (max-width: 600px) {
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+  }
 }
 
 .price {
@@ -18,8 +24,14 @@
   gap: 8px;
   align-items: center;
 
+  .price-discount {
+    font-size: 1.5rem;
+  }
+
   .price-original {
+    color: var(--tui-accent-active);
     text-decoration-line: line-through;
+    font-size: 2.5rem;
   }
 }
 
@@ -32,9 +44,21 @@
 .ticket-details-input {
   padding: 4px 0;
   margin-bottom: 4px;
+  max-width: 240px;
 }
 
 .ticket-details-available {
   display: flex;
   gap: 8px;
+  align-items: center;
+}
+
+.ticket-details-button {
+  margin: 16px 0;
+  width: 240px;
+}
+
+.address {
+  font-style: italic;
+  font-size: 1.5rem;
 }
