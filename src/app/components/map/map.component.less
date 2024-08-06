@@ -1,0 +1,22 @@
+:host {
+  width: 100%;
+  height: 100%;
+  display: block;
+
+  ::ng-deep .ol-scale-line {
+    position: relative;
+  }
+  ::ng-deep .ol-scale-line,
+  ::ng-deep .ol-scale-line-inner {
+    background-color: transparent;
+    border-color: var(--text-color);
+    color: var(--text-color);
+    font-size: inherit;
+    bottom: auto;
+  }
+}
+
+.map-container {
+  width: 100%;
+  height: 500px;
+}
