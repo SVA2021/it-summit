@@ -2,7 +2,13 @@ import { ChangeDetectionStrategy, Component, inject, Input, OnInit } from '@angu
 import { SummitEvent, Ticket } from '@core/models/models';
 import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 import { TuiBadgeModule, TuiInputNumberModule, tuiInputNumberOptionsProvider, TuiTagModule } from '@taiga-ui/kit';
-import { TuiButtonModule, TuiFormatNumberPipeModule, TuiSvgModule, TuiTextfieldControllerModule } from '@taiga-ui/core';
+import {
+  TuiAlertService,
+  TuiButtonModule,
+  TuiFormatNumberPipeModule,
+  TuiSvgModule,
+  TuiTextfieldControllerModule,
+} from '@taiga-ui/core';
 import { AsyncPipe, DatePipe, NgIf, NgOptimizedImage, UpperCasePipe } from '@angular/common';
 import { TuiCurrencyPipeModule } from '@taiga-ui/addon-commerce';
 import { Store } from '@ngrx/store';
@@ -44,6 +50,7 @@ import { getDiscountPrice } from '@core/helpers/helpers';
 })
 export class TicketDetailsComponent implements OnInit {
   @Input() ticket!: Ticket;
+  alerts = inject(TuiAlertService);
   store = inject(Store);
   destroy$ = inject(TuiDestroyService);
   eventDetails$: Observable<SummitEvent | undefined> = of(undefined);
@@ -64,6 +71,8 @@ export class TicketDetailsComponent implements OnInit {
     this.store.dispatch(
       BasketActions.addItemToBasket({ item: { ticket: this.ticket, quantity: this.qty.value || 0 } })
     );
+
+    this.alerts.open('Added to basket', { status: 'success' }).pipe(takeUntil(this.destroy$)).subscribe();
   }
 
   getPriceWithDiscount() {
