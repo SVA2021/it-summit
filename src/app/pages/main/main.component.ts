@@ -10,9 +10,9 @@ import {
   selectFutureSummitEvents,
   selectSummitEventsError,
   selectSummitEventsLoading,
-} from '../../store/summit-events/summit-events.selectors';
+} from '@store/summit-events/summit-events.selectors';
 import { Observable, takeUntil } from 'rxjs';
-import { SummitEventsActions } from '../../store/summit-events/summit-events.actions';
+import { SummitEventsActions } from '@store/summit-events/summit-events.actions';
 import { TuiDestroyService } from '@taiga-ui/cdk';
 
 @Component({

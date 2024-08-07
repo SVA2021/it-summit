@@ -3,7 +3,7 @@ import { Contact } from '@core/models/models';
 import { CONTACTS } from '@db/fakeDB';
 import { TuiIslandModule } from '@taiga-ui/kit';
 import { TuiLinkModule } from '@taiga-ui/core';
-import {MapComponent} from "@components/map/map.component";
+import { MapComponent } from '@components/map/map.component';
 
 @Component({
   selector: 'app-contacts',

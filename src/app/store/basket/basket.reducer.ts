@@ -1,7 +1,7 @@
 import { BasketItem } from '@core/models/models';
 import { createReducer, on } from '@ngrx/store';
 import { BasketActions } from '@store/basket/basket.actions';
-import {addItemInBasket, removeItemFromBasket, replaceItemInBasket} from '@core/helpers/helpers';
+import { addItemInBasket, removeItemFromBasket, replaceItemInBasket } from '@core/helpers/helpers';
 
 export type BasketState = BasketItem[];
 

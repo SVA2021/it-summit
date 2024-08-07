@@ -9,7 +9,7 @@ import { takeUntil } from 'rxjs';
 import { TuiCurrencyPipeModule } from '@taiga-ui/addon-commerce';
 import { getDiscountPrice } from '@core/helpers/helpers';
 import { Ticket } from '@core/models/models';
-import {RouterLink} from "@angular/router";
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-basket-details',

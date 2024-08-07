@@ -6,8 +6,8 @@ import { provideRouter } from '@angular/router';
 import { routes } from './app.routes';
 import { provideStore } from '@ngrx/store';
 import { provideEffects } from '@ngrx/effects';
-import { appStore } from './store/app.reducers';
-import { appEffects } from './store/app.effects';
+import { appStore } from '@store/app.reducers';
+import { appEffects } from '@store/app.effects';
 
 export const appConfig: ApplicationConfig = {
   providers: [
