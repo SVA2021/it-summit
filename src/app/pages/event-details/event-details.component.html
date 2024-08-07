@@ -1,1 +1,32 @@
-<p>event-details works!</p>
+<h1 class="main-title">EVENT DETAILS</h1>
+
+@if (event$) {
+  <ng-container *ngIf="event$ | async as eventDetails">
+    @if (eventDetails) {
+      <div class="event-wrapper">
+        <div class="event-img">
+          <img
+            [ngSrc]="eventDetails.imageUrl"
+            [width]="475"
+            [height]="300"
+            [alt]="'event bg image'"
+            priority="low"
+            class="event-details-image" />
+        </div>
+        <div class="event-content">
+          <h3 class="event-title">{{ eventDetails.name }}</h3>
+          <p>{{ eventDetails.address }}</p>
+          <p>{{ eventDetails.startDate }} - {{ eventDetails.stopDate }}</p>
+          <p>{{ eventDetails.description }}</p>
+        </div>
+      </div>
+      <div class="event-map">
+        <app-map [coordinates]="eventDetails.coordinates"></app-map>
+      </div>
+    } @else {
+      <div class="error">No event found</div>
+    }
+  </ng-container>
+} @else {
+  <tui-loader [overlay]="true" size="xxl"></tui-loader>
+}
