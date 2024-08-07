@@ -5,7 +5,13 @@
     }
   </div>
   <div class="personal">
-    <a routerLink="/private" tuiLink> Private area </a>
+    <button
+      tuiIconButton
+      type="button"
+      appearance="outline"
+      size="m"
+      [icon]="'tuiIconUser'"
+      routerLink="/private"></button>
     <app-basket-details></app-basket-details>
     <button
       tuiIconButton
