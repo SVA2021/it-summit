@@ -1,4 +1,4 @@
-import {Contact, SummitEvent, Ticket} from '@core/models/models';
+import { Contact, SummitEvent, Ticket } from '@core/models/models';
 
 export const SUMMIT_EVENTS: SummitEvent[] = [
   {
@@ -7,10 +7,10 @@ export const SUMMIT_EVENTS: SummitEvent[] = [
     startDate: '2023-01-01',
     stopDate: '2023-02-01',
     description: 'Summit 1 description',
-    imageUrl: 'https://dummyjson.com/image/900x300/008080/ffffff?text=Hello+IT+Summit+1',
+    imageUrl: 'https://dummyjson.com/image/900x300/008080/a61111?text=Event+Bg+1',
     isFinished: true,
     address: 'Address 1',
-    coordinates: [0, 0],
+    coordinates: [28.34, 35.67],
   },
   {
     id: 2,
@@ -18,10 +18,10 @@ export const SUMMIT_EVENTS: SummitEvent[] = [
     startDate: '2023-05-01',
     stopDate: '2023-06-01',
     description: 'Summit 2 description',
-    imageUrl: 'https://dummyjson.com/image/900x300/008080/ffffff?text=Hello+IT+Summit+2',
+    imageUrl: 'https://dummyjson.com/image/900x300/008080/a61111?text=Event+Bg+2',
     isFinished: true,
     address: 'Address 2',
-    coordinates: [0, 0],
+    coordinates: [78.22, 21.65],
   },
   {
     id: 3,
@@ -29,10 +29,10 @@ export const SUMMIT_EVENTS: SummitEvent[] = [
     startDate: '2023-07-01',
     stopDate: '2023-08-01',
     description: 'Summit 3 description',
-    imageUrl: 'https://dummyjson.com/image/900x300/008080/ffffff?text=Hello+IT+Summit+3',
+    imageUrl: 'https://dummyjson.com/image/900x300/008080/a61111?text=Event+Bg+3',
     isFinished: true,
     address: 'Address 3',
-    coordinates: [0, 0],
+    coordinates: [9.45, 11.23],
   },
   {
     id: 4,
@@ -40,10 +40,10 @@ export const SUMMIT_EVENTS: SummitEvent[] = [
     startDate: '2023-09-01',
     stopDate: '2023-10-01',
     description: 'Summit 4 description',
-    imageUrl: 'https://dummyjson.com/image/1900x1200/008080/ffffff?text=Hello+IT+Summit+4',
+    imageUrl: 'https://dummyjson.com/image/1900x1200/008080/a61111?text=Event+Bg+4',
     isFinished: false,
     address: 'Address 4',
-    coordinates: [0, 0],
+    coordinates: [23.45, 45.67],
   },
   {
     id: 5,
@@ -51,10 +51,10 @@ export const SUMMIT_EVENTS: SummitEvent[] = [
     startDate: '2023-11-01',
     stopDate: '2023-12-01',
     description: 'Summit 5 description',
-    imageUrl: 'https://dummyjson.com/image/1900x1200/008080/ffffff?text=Hello+IT+Summit+5',
+    imageUrl: 'https://dummyjson.com/image/1900x1200/008080/a61111?text=Event+Bg+5',
     isFinished: false,
     address: 'Address 5',
-    coordinates: [0, 0],
+    coordinates: [56.78, 78.90],
   },
   {
     id: 6,
@@ -62,10 +62,10 @@ export const SUMMIT_EVENTS: SummitEvent[] = [
     startDate: '2024-01-01',
     stopDate: '2024-02-01',
     description: 'Summit 6 description',
-    imageUrl: 'https://dummyjson.com/image/1900x1200/008080/ffffff?text=Hello+IT+Summit+6',
+    imageUrl: 'https://dummyjson.com/image/1900x1200/008080/a61111?text=Event+Bg+6',
     isFinished: false,
     address: 'Address 6',
-    coordinates: [0, 0],
+    coordinates: [12.34, 56.78],
   },
 ];
 
