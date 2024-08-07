@@ -7,7 +7,6 @@ import { selectSummitEventById } from '@store/summit-events/summit-events.select
 import { TuiButtonModule, TuiLoaderModule } from '@taiga-ui/core';
 import { AsyncPipe, NgIf, NgOptimizedImage, NgStyle } from '@angular/common';
 import { MapComponent } from '@components/map/map.component';
-import { SummitEventsActions } from '@store/summit-events/summit-events.actions';
 
 @Component({
   selector: 'app-event-details',
@@ -28,6 +27,5 @@ export class EventDetailsComponent implements OnInit {
     if (this.eventID) {
       this.event$ = this.store.select(selectSummitEventById(+this.eventID));
     }
-    this.store.dispatch(SummitEventsActions.loadingSummitEvents());
   }
 }

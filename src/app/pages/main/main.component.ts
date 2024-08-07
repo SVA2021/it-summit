@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, inject, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { TuiCarouselModule, TuiIslandModule, TuiPaginationModule } from '@taiga-ui/kit';
 import { RouterLink } from '@angular/router';
 import { TuiButtonModule, TuiLinkModule, TuiLoaderModule } from '@taiga-ui/core';
@@ -12,7 +12,6 @@ import {
   selectSummitEventsLoading,
 } from '@store/summit-events/summit-events.selectors';
 import { Observable, takeUntil } from 'rxjs';
-import { SummitEventsActions } from '@store/summit-events/summit-events.actions';
 import { TuiDestroyService } from '@taiga-ui/cdk';
 
 @Component({
@@ -37,7 +36,7 @@ import { TuiDestroyService } from '@taiga-ui/cdk';
   changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [TuiDestroyService],
 })
-export class MainComponent implements OnInit {
+export class MainComponent {
   store = inject(Store);
   destroy$ = inject(TuiDestroyService);
   futureEvents$: Observable<SummitEvent[]> = this.store.select(selectFutureSummitEvents).pipe(takeUntil(this.destroy$));
@@ -49,8 +48,4 @@ export class MainComponent implements OnInit {
 
   futureEventIndex = 0;
   finishedEventIndex = 0;
-
-  ngOnInit() {
-    this.store.dispatch(SummitEventsActions.loadingSummitEvents());
-  }
 }

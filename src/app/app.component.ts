@@ -13,6 +13,9 @@ import { TuiThemeNightService } from '@taiga-ui/addon-doc';
 import { AsyncPipe, NgIf } from '@angular/common';
 import { AuthService } from '@core/services/auth.service';
 import { LocalstorageService } from '@core/services/localstorage.service';
+import { Store } from '@ngrx/store';
+import { SummitEventsActions } from '@store/summit-events/summit-events.actions';
+import { TicketsActions } from '@store/tickets/tickets.actions';
 
 @Component({
   selector: 'app-root',
@@ -36,6 +39,7 @@ export class AppComponent implements OnInit {
   title = 'it-summit';
   auth = inject(AuthService);
   lsService = inject(LocalstorageService);
+  store = inject(Store);
 
   constructor(@Inject(TuiThemeNightService) readonly night$: TuiThemeNightService) {}
 
@@ -52,5 +56,8 @@ export class AppComponent implements OnInit {
         this.auth.user = this.lsService.get('user');
       }
     }
+
+    this.store.dispatch(SummitEventsActions.loadingSummitEvents());
+    this.store.dispatch(TicketsActions.loadingTickets());
   }
 }
