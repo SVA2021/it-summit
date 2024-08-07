@@ -58,10 +58,11 @@ export class TicketDetailsComponent implements OnInit {
   qty = new FormControl<number>(0, [Validators.min(0)]);
 
   ngOnInit() {
-    this.qty.addValidators(Validators.max(this.ticket.availableQty));
-    this.qty.updateValueAndValidity();
-
-    this.eventDetails$ = this.store.select(selectSummitEventById(this.ticket.eventId)).pipe(takeUntil(this.destroy$));
+    if (this.ticket) {
+      this.qty.addValidators(Validators.max(this.ticket.availableQty));
+      this.qty.updateValueAndValidity();
+      this.eventDetails$ = this.store.select(selectSummitEventById(this.ticket.eventId)).pipe(takeUntil(this.destroy$));
+    }
   }
 
   addToBasket() {
